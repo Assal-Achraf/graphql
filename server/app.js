@@ -15,8 +15,7 @@ const mongodb_password = process.env.MONGODB_PASSWORD;
 
 const mongodb_cluster = process.env.MONGODB_CLUSTER;
 const mongo_conection_string = `mongodb+srv://${mongodb_username}:${mongodb_password}@${mongodb_cluster}.vfm6iyg.mongodb.net/?retryWrites=true&w=majority`;
-console.log(a);
-console.log(mongo_conection_string)
+
 mongoose.connect(mongo_conection_string)
 mongoose.connection.once('open', () => {
     console.log('conneted to database');
