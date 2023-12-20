@@ -19,8 +19,6 @@ var BookType;
 var AuthorType;
 // dummy data
 
-
-
 AuthorType = new GraphQLObjectType({
     name: 'Author',
     fields: ( ) => ({
