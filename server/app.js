@@ -3,7 +3,7 @@ const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose')
 const dotenv = require('dotenv');
-
+const cors = require('cors');
 // Load environment variables from .env file
 const a = dotenv.config();
 
@@ -21,6 +21,10 @@ mongoose.connection.once('open', () => {
     console.log('conneted to database');
 });
 
+
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 // bind express with graphql
 app.use('/graphql', graphqlHTTP.graphqlHTTP({
     schema,
