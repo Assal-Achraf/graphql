@@ -1,8 +1,15 @@
-import { useQuery} from '@apollo/client';
+import { useQuery, gql } from '@apollo/client';
+const GET_Books = gql`
+  query Books {
+    books {
+      id
+      name
+    }
+  }
+`;
 
-import { GET_Books } from '../../querys/query';
 
-function DisplayBooks() {
+function DisplayLocations() {
   const { loading, error, data } = useQuery(GET_Books);
 
   if (loading) return <p>Loading...</p>;
@@ -17,4 +24,4 @@ function DisplayBooks() {
   ));
 }
 
-export default DisplayBooks
+export default DisplayLocations
