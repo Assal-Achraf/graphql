@@ -1,13 +1,15 @@
 import { useQuery,useMutation } from '@apollo/client';
 import React, { useState } from 'react';
-import { GET_Author , addBookMutation } from '../querys/query';
+import { GET_Author,GET_Books , addBookMutation } from '../querys/query';
 
 
 const AddBook = () => {
 
     const { loading: authorLoading, error: authorError, data: authorData } = useQuery(GET_Author);  
 
-    const [addBook,{ loading: bookLoading, error: bookError, data: bookData}] = useMutation(addBookMutation);
+    const [addBook,{ loading: bookLoading, error: bookError, data: bookData}] = useMutation(addBookMutation, {
+        refetchQueries: [{query:GET_Books}]
+      });
 
     const [state, setState] = useState({
         name: '',
@@ -29,14 +31,13 @@ const AddBook = () => {
 
     const submitForm = async (e) => {
         e.preventDefault()
-        await addBook({ variables: { name: state.name,genre:state.genre,authorId:state.authorId } });
+        await addBook({ variables: { name: state.name,genre:state.genre,authorId:state.authorId }});
         if (bookLoading) {
             console.log("loding");
         }
         if (bookError) {
             console.log(bookError.message);
         }
-        console.log(bookData);
     };
 
     return (

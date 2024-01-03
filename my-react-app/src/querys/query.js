@@ -14,7 +14,7 @@ query Authors {
 export const GET_Books = gql`
 query Books {
   books {
-    idcc
+    id
     name
   }
 }
